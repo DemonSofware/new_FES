@@ -1,0 +1,294 @@
+/**
+* Eric Meyer's Reset CSS v2.0
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video, input {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font: inherit;
+	font-size: 100%;
+	vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, menu, nav, section, time {
+	display: block;
+}
+body {
+	zoom: 85%;
+	line-height: 1;
+	color: black;
+	background: white;
+	text-align: center; /* for ie5.+*/
+	word-wrap: break-word;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* meyerweb css reset end */
+
+textarea:focus, input:focus {
+	outline: 0;
+}
+
+input {
+	border-width: 0;
+}
+
+em {
+	font-style: italic;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: bold;
+}
+
+sup {
+	vertical-align: text-top;
+	font-size: 58.3%; /*Corresponds to Photoshop's font size glyph transformation*/
+}
+sub {
+	vertical-align: text-bottom;
+	font-size: 58.3%; /*Corresponds to Photoshop's font size glyph transformation*/
+}
+
+img,
+embed,
+object,
+video {
+	max-width: 100%;
+}
+
+.group:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+
+.global_container_ {
+	padding: 58px 0 69px;
+	background: url(images/centr1.png) no-repeat;
+	min-height: 677px;
+	width: 1054px;
+	min-height: 677px;
+	margin: 0 auto;
+	float: none;
+	height: auto;
+	position: relative;
+}
+.logo {
+	display: block;
+	position: relative;
+	right: 10px;
+	margin: 0 auto;
+}
+.blok {
+	width: 546px;
+}
+.c_wrapper1 {
+	width: 469px;
+	float: left;
+	position: relative;
+}
+.create_a_new_account {
+	text-decoration: none;
+	font-size: 43.22px;
+	color: #615e5e;
+	font-style: normal;
+	font-weight: bold;
+	font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial,sans-serif;
+	margin: -2px auto -8px;
+	padding: 0 5px 0 32px;
+	text-align: left;
+}
+.polya {
+	position: relative;
+	margin: 53px 0 0;
+}
+.c_wrapper2 {
+	float: left;
+	margin: 10px 0 0;
+	position: relative;
+}
+.username {
+	text-decoration: none;
+	font-size: 17.39px;
+	color: #e8edbd;
+	font-style: italic;
+	font-weight: normal;
+	font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial,sans-serif;
+	margin: -2px auto -3px;
+	padding: 0 33px;
+	text-align: left;
+}
+.email {
+	text-decoration: none;
+	font-size: 17.39px;
+	color: #e8edbd;
+	font-style: italic;
+	font-weight: normal;
+	font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial,sans-serif;
+	margin: 76px auto -3px;
+	padding: 0 44px;
+	text-align: left;
+}
+.create_a_password {
+	text-decoration: none;
+	font-size: 17.39px;
+	color: #e8edbd;
+	font-style: italic;
+	font-weight: normal;
+	font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial,sans-serif;
+	margin: 75px auto 0;
+	padding: 0 0 0 6px;
+	text-align: left;
+}
+.re-enter_password {
+	text-decoration: none;
+	font-size: 17.39px;
+	color: #e8edbd;
+	font-style: italic;
+	font-weight: normal;
+	font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial,sans-serif;
+	margin: 75px auto 0;
+	text-align: left;
+}
+.c_wrapper3 {
+	width: 296px;
+	float: right;
+	position: relative;
+}
+.username_2 {
+	height: 28px;
+	padding: 2px;
+	border: 0;
+	background: url(images/username.png) no-repeat;
+	height: 28px;
+	display: block;
+	width: 290px;
+	position: relative;
+	right: 1px;
+	margin: 0 auto;
+}
+.email_2 {
+	height: 29px;
+	padding: 2px;
+	border: 0;
+	background: url(images/email.png) no-repeat;
+	height: 29px;
+	display: block;
+	width: 292px;
+	margin: 56px 0 0;
+}
+.create_a_password_2 {
+	height: 29px;
+	padding: 2px;
+	border: 0;
+	background: url(images/create_a_password.png) no-repeat;
+	height: 29px;
+	display: block;
+	width: 290px;
+	position: relative;
+	right: 1px;
+	margin: 56px auto 0;
+}
+.re-enter_password_2 {
+	height: 28px;
+	padding: 2px;
+	border: 0;
+	background: url(images/re-enter_password.png) no-repeat;
+	height: 28px;
+	display: block;
+	width: 290px;
+	position: relative;
+	right: 1px;
+	margin: 59px auto 0;
+}
+
+.mergedimage_2{
+	height: 50px;
+	text-align: left;
+	text-indent: 0;
+	text-decoration: none;
+	font-size: 19.76px;
+	line-height: 23.71px;
+	color: #ffffff;
+	font-style: normal;
+	font-weight: normal;
+	font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial,sans-serif;
+	background: url(images/registraion.png) no-repeat;
+	height: 50px;
+	cursor: pointer;
+	background-color: transparent;
+	display: block;
+	width: 195px;
+	position: relative;
+	left: 11px;
+	margin: 52px auto 0;
+}
+.ikonki {
+	width: 41px;
+	float: right;
+	margin: 82px 0 0;
+	position: relative;
+}
+.galozhka {
+	display: block;
+	margin: 0 auto;
+}
+.galozhka_2 {
+	display: block;
+	margin: 52px auto 0;
+}
+.zvezdochka {
+	display: block;
+	margin: 51px auto 0;
+}
+.zvezdochka_1 {
+	display: block;
+	margin: 53px auto 0;
+}
+.blok-form {
+	position: relative;
+	margin: 26px auto 0;
+}
+.blok-form {
+	width: 546px;
+	position: relative;
+	left: 25px;
+}
