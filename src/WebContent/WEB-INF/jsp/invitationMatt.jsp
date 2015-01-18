@@ -9,6 +9,7 @@
     <meta name="keywords" content="">
     <title>invitationMatt</title>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="resources/stylemat.css" />
     <script src="//code.jquery.com/jquery-1.10.2.js"></script> 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -180,108 +181,9 @@ function ajaxjson(){
 		else {document.getElementById("next").disabled= true;}
 		document.getElementById("txtback").value=0;
 		document.getElementById("back").disabled= true;
+	    document.getElementById("art").scrollTop = 200;
 	}</script>
 	
-    <style>
-        head {
-            width: auto;
-        }
-        body {
-            width: auto;
-            background:#f0f0f0;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .header {
-            font-family: Arial, Helvetica, sans-serif;
-            background: black;
-            width: auto;
-            height: auto;
-            margin-left: auto;
-            margin-right: auto;
-            font-size: 1.2em;
-            font-weight: bold;
-        }
-        .topmenu {
-            display: inline-block;
-            text-align:;
-            color: white;
-            padding: 10px 19px 10px 0px;
-            font-weight:100;
-            font-size: 0.9em}
-        .logo {
-            display: inline-block;
-            text-align:left;
-            color: white;
-            padding: 10px 0px 7px 19px;
-        }
-        a.logo:link{
-            text-decoration:none;
-            color:#ffffff;
-        }
-        a.logo:hover{
-            text-decoration:none;
-            color:#e9e9e9;
-        }
-        a.logo:active{
-            text-decoration:none;
-            color:#e0e0e0;
-        }
-        a.logo:visited{
-            text-decoration:none;
-            color:#ffffff;
-        }
-        p {
-            font-size: 0.6em;
-        }
-        #wrapper {
-            width: 100%;
-            overflow: hidden; /* will contain if #first is longer than #second */
-        }
-        #first {
-            width: 65%;
-            float:left; /* add this */
-        }
-        #second {
-            overflow: hidden; /* if you don't want #second to wrap below #first */
-            background: #d6f000;
-        }
-        .left {
-            text-align: left;
-            padding:0px 20px 0 20px;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 1.6em;
-            color: #888888;
-        }
-        .right {
-            text-align: left;
-            padding:0px 20px 0 20px;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 1.6em;
-            color: #888888;
-        }
-        #shareembedemail {
-            display: inline-block;
-            text-align: center;
-        }
-      
-        #table1
-        {
-            border:solid 1px;
-            border-collapse:collapse;
-        }
-        #table1 th
-        {
-            border:solid 1px;
-            border-collapse:collapse;
-        }
-        #table1 td
-        {
-            border:solid 1px;
-            vertical-align:middle;
-        }
-        #art::-webkit-scrollbar { width: 0 !important }
-    </style>
 </head>
 <body onload="myLoad()">
 <div class="header">
@@ -302,11 +204,11 @@ function ajaxjson(){
               <input id="txtback" name="txtback" value=0 type="hidden"/>
  			  <input id="txtnext" name="txtnext" value='${nWek}' type="hidden"/>
  			<div>
-            <table id="mattTable" border="1" width="100%" >
+            <table id="mattTable">
             </table>
             </div>
             <div id="art" style="overflow:scroll; height:300px; width:100% ">
-            <table id="mattTable1" border="1" width="100%" >
+            <table id="mattTable1" >
             </table>
             </div>
             <script>

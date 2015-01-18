@@ -168,7 +168,7 @@ function collab(element) {
             border:solid 1px;
             vertical-align:middle;
         }
-        #placetable::-webkit-scrollbar { width: 0 !important }
+   /*      #placetable::-webkit-scrollbar { width: 0 !important } */
 
     </style>
  

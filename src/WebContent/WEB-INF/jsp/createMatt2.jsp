@@ -9,13 +9,14 @@
     <meta name="keywords" content="">
     <title>Save</title>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" type="text/css" href="resources/stylemat.css" />
     <script src="//code.jquery.com/jquery-1.10.2.js"></script> 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
     
 <script type="text/javascript">
-function ajaxjson1(){
+function save(){
 	var json=document.getElementById("par1").value;
 	var data ="mattjson="+json;
 	$.ajax({
@@ -238,13 +239,7 @@ function newJson1(){
   }
   </script>
 <script type="text/javascript">
-$(document).ready(function(){ PopUpHide(); });
-function PopUpShow(){ $("#window-popup").show(); } 
-function PopUpHide(){ $("#window-popup").hide(); 
-
-}
-</script><script type="text/javascript">
-function ajaxjson2(){
+function mdownload(){
 	var json=document.getElementById("par1").value;
 	var data ="mattjson="+json;
 	$.ajax({
@@ -263,136 +258,37 @@ function m_nameerror(){
 	var val = document.getElementById("mattName").value.trim();
 	if (val) {
 		document.getElementById("table").value=document.getElementById("mattName").value;
-		document.getElementById("b_download").disabled= false;
-		document.getElementById("b_download").style.cursor="pointer";
 		document.getElementById("saveMatt").disabled= false;
 		document.getElementById("saveMatt").style.cursor="pointer";
 	}else{
-		document.getElementById("b_download").disabled= true;
-		document.getElementById("b_download").style.cursor="";
 		document.getElementById("saveMatt").disabled= true;
 		document.getElementById("saveMatt").style.cursor="";
 	}
 
 }
 </script>
-    <style>
-        head {
-            width: auto;
-        }
-        body {
-            width: auto;
-            background:#f0f0f0;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .header {
-            font-family: Arial, Helvetica, sans-serif;
-            background: black;
-            width: auto;
-            height: auto;
-            margin-left: auto;
-            margin-right: auto;
-            font-size: 1.2em;
-            font-weight: bold;
-        }
-        .topmenu {
-            display: inline-block;
-            text-align:;
-            color: white;
-            padding: 10px 19px 10px 0px;
-            font-weight:100;
-            font-size: 0.9em}
-        .logo {
-            display: inline-block;
-            text-align:left;
-            color: white;
-            padding: 10px 0px 7px 19px;
-        }
-        a.logo:link{
-            text-decoration:none;
-            color:#ffffff;
-        }
-        a.logo:hover{
-            text-decoration:none;
-            color:#e9e9e9;
-        }
-        a.logo:active{
-            text-decoration:none;
-            color:#e0e0e0;
-        }
-        a.logo:visited{
-            text-decoration:none;
-            color:#ffffff;
-        }
-        p {
-            font-size: 0.6em;
-        }
-        #wrapper {
-            width: 100%;
-            overflow: hidden; /* will contain if #first is longer than #second */
-        }
-        #first {
-            width: 65%;
-            float:left; /* add this */
-        }
-        #second {
-            overflow: hidden; /* if you don't want #second to wrap below #first */
-            background: #d6f000;
-        }
-        .left {
-            text-align: left;
-            padding:0px 20px 0 20px;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 1.6em;
-            color: #888888;
-        }
-        .right {
-            text-align: left;
-            padding:0px 20px 0 20px;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 1.6em;
-            color: #888888;
-        }
-        #shareembedemail {
-            display: inline-block;
-            text-align: center;
-        }
-      
-        #table1
-        {
-            border:solid 1px;
-            border-collapse:collapse;
-        }
-        #table1 th
-        {
-            border:solid 1px;
-            border-collapse:collapse;
-        }
-        #table1 td
-        {
-            border:solid 1px;
-            vertical-align:middle;
-        }
-        #art::-webkit-scrollbar { width: 0 !important }
+<script type="text/javascript">
+function m_submit(){
+	var x=document.getElementsByClassName("mseti");
+    var i;
+    var y=0;
+    for (i = 0; i < x.length; i++) {
+        if(x[i].checked) y++;
+    }
+    if(y==0) save();
+    else mdownload();
+}
+</script>
+  <script>
+  function myFunction() {
+	    var elmnt = document.getElementById("art");
+	    elmnt.scrollTop = 600;
+	}
+  </script>
 
-		.popup { width:100%;
-		  min-height:100%;
-		  background-color: rgba(0,0,0,0.5); 
-		  overflow:hidden; 
-		  position:fixed;
-		  top:0px; } 
-        .popup .popup-content { margin:40px auto 0px auto;
-         width:400px;
-         height: 400px; 
-         padding:10px; 
-         background-color: #c5c5c5; 
-         border-radius:5px; 
-         box-shadow: 0px 0px 10px #000; }
-
-    </style>
 </head>
-<body>
+<body onload="myFunction()">
+
 <div class="header">
     <span><a class="logo" href="http://myavailabletime.com/">MyAvailableTime</a></span>
     <span class="topmenu" style="float:right;"> Logout</span>
@@ -411,11 +307,11 @@ function m_nameerror(){
               <input id="txtback" name="txtback" value=0 type="hidden"/>
  			  <input id="txtnext" name="txtnext" value=0 type="hidden"/>
  			<div>
-            <table id="mattTable" border="1" width="100%" >
+            <table id="mattTable"  >
             </table>
             </div>
-            <div id="art" style="overflow:scroll; height:300px; width:100% ">
-            <table id="mattTable1" border="1" width="100%" >
+            <div id="art" style="overflow:auto; height:300px; width:100% ">
+            <table id="mattTable1"  >
             </table>
             </div>
             <script>
@@ -471,6 +367,8 @@ function m_nameerror(){
             </script>
         </div>
     </div>
+    </form>
+    <form id=myform>
     <div id="second">
         <div class="right">
             <p style="font-size: 1em ">Settings</p>
@@ -516,32 +414,26 @@ function m_nameerror(){
                 <option value="60" ${ts60}>1 hour</option>
             </select></p>
                 <p>repeat <input type="checkbox" id="mRepeat" disabled onclick="repea(this.checked)"></p>
-            	<button id="b_download" type="button" disabled onclick="javascript:PopUpShow()"  style="border: none; color: blue; background: #d6f000; font-size: 0.6em; width: 75px; text-align: right; ">download</button>
-            <div>
+ <!--            	<button id="b_download" type="button" disabled onclick="view()"  style="border: none; color: blue; background: #d6f000; font-size: 0.6em; width: 75px; text-align: right; ">download</button>   -->           
+ 		<d:forEach items="${download}" var="item" >
+		<p>${item.key}</p>
+			<d:forEach items="${item.value}" var="itemM" >
+				<p><input class="mseti" type="checkbox" name="${item.key}" value="${itemM}" />${itemM}</p>
+			</d:forEach>	
+		</d:forEach>
+				
                 <div style="text-align:right; margin: 40px 10px 0px 0px; color: white">
-                	<button id="saveMatt" type="button" disabled onclick="ajaxjson1()" >SAVE</button>
+                	<button id="saveMatt" type="button" disabled onclick="m_submit()" >SAVE</button>
             	</div>
             	
-        	</div>
+        	
 		</div>
     </div>
 
-	</form>
-	<form id=myform>
 	<input type="hidden" id="table" name="table">
-	    <div class="popup" id="window-popup">
-    	<div class="popup-content">
-		<d:forEach items="${download}" var="item" >
-		<p>${item.key}</p>
-			<d:forEach items="${item.value}" var="itemM" >
-				<p> <input type="checkbox" name="${item.key}" value="${itemM}" />${itemM}</p>
-			</d:forEach>	
-		</d:forEach>
-<!-- 		<button  onclick="javascript:PopUpHide()">close</button> -->
-		<button onclick="ajaxjson2()" >download</button>
-    	</div>
-    </div>
+
 	</form>
+
 </div>
 </body>
 </html>
