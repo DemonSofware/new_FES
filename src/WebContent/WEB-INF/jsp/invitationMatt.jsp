@@ -99,13 +99,13 @@ function ajaxjson(){
                 var id = "td" + i+"s" + j;
                 td.id = id;
                 td.appendChild(document.createTextNode(json[3][i]));
-                if(json[4][i][j]==0) {
+/*                 if(json[4][i][j]==0) {
                     td.style.backgroundColor = "green";
                     td.style.cursor = "pointer";
                     td.setAttribute("onClick", "changeColor(id)");
                     td.style.cursor = "pointer";
                 }
-                if(json[4][i][j]==2) {
+ */                if(json[4][i][j]==0) {
                     td.style.backgroundColor = "yellow";
                     td.style.cursor = "pointer";
                     td.setAttribute("onClick", "changeColor(id)");
