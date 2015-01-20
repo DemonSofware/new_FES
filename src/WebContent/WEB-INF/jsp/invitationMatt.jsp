@@ -250,7 +250,6 @@ function ajaxjson(){
 	</form>
 	<form id=myform>
 	<input type="hidden" id="idmatt" name="idmatt" value='${tableId}'>
-	<input type="hidden" id="sozd" name="sozd" value='${nameSozd}'>
 	</form>
 </div>
 </body>

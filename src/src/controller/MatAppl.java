@@ -431,15 +431,16 @@ public String download(HttpServletRequest request,@RequestParam ("table") String
 		return  homereturn (model);
     }
 	@RequestMapping({"/saveMattInvitation"})
-	public String saveMattInvitation(@RequestParam ("idmatt") String idmatt,@RequestParam ("sozd") String namesozd, Model model){
+	public String saveMattInvitation(@RequestParam ("idmatt") String idmatt, Model model){
 		newTabList=new ArrayList<Boolean>();
 		newTabList=Matt.fromBrowser2ArrayList(newTablJSON);
-		newMatt = new Matt();
 		int m_idmat=Integer.parseInt(idmatt);
 		oldMatt=ifesbes1.getMatt(m_idmat);
-		newMatt.setData(oldMatt.getData());
+		newMatt=new Matt();
+		mat.MattData data = new MattData(null,oldMatt.getData().getnDays(),oldMatt.getData().getStartDate(),0,24,oldMatt.getData().getTimeSlot(),null);
+		newMatt.setData(data);
 		newMatt.setSlots(newTabList);
-		ifesbes1.saveMatt(newMatt,namesozd);
+		ifesbes1.saveGuestsMatt(m_idmat,newMatt,userName);
 		return  showInvitations (model);
     }
 	   
