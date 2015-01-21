@@ -104,9 +104,6 @@ function ajaxjson(){
                     td.style.cursor = "pointer";
                     td.setAttribute("onClick", "changeColor(id)");
                     td.style.cursor = "pointer";
-              		json[4][i][j]=2;
-             		$('#par1').attr('value', JSON.stringify(json));
-
                 }
                  if(json[4][i][j]==2) {
                     td.style.backgroundColor = "yellow";
@@ -215,6 +212,16 @@ function ajaxjson(){
             </table>
             </div>
             <script>
+    		var arr = $('#par1').attr('value');
+            var json = JSON.parse(arr);
+            for(var i = 0; i < json[3].length; i++){
+               for(var j = 0; j < json[2].length; j++){
+                   if(json[4][i][j]==0) {
+                 		json[4][i][j]=2;
+                 		$('#par1').attr('value', JSON.stringify(json));
+                   }
+                }
+            }           
             viewTab(0);           
             </script>
         </div>
