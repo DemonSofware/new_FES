@@ -13,8 +13,6 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
-   
-
 <script type="text/javascript">
 function ajaxjson(){
 	var json=document.getElementById("par1").value;
@@ -62,10 +60,10 @@ function newJson1(){
 }
     </script> 
     <script type="text/javascript">
-    function mtitle(titl,txt){
-    	var buf= new Srting();
-    	buf=titl+"\n"+txt;
-    	return buf;
+    function mtitle(id,txt){
+    	var buf=document.getElementById(id).title;
+    	buf=buf+"\n"+txt;
+    	document.getElementById(id).title=buf;
     }
     </script>
  <script type="text/javascript">
@@ -77,13 +75,13 @@ function newJson1(){
  		var st=document.getElementById("guest").value;
  		st=st.substr(1);
  		st=st.slice(0,-1);
- 		st = st.split(", ");
- 		
+ 		st = st.split(", "); 		
  		for (var io=0;io<st.length;io++){
  			var data1="guest="+encodeURIComponent(st[io]);
  			$.ajax({
  				url : "guestJson",
  				data : data1,
+ 				async: false,
  				type : "GET",
  				success : function(gjson) {
  					var mjson=JSON.parse(gjson);
@@ -91,14 +89,12 @@ function newJson1(){
  		               for(var j = s; j < json[2].length && j<s+7; j++){
  		                   if(json[4][i][j]>1 && mjson[4][i][j]==1) {
  		                	 var id = "td" + i+"s" + j;	
- 		                	 var titl=document.getElementById(arg).title;
- 		                	 document.getElementById(arg).title=mtitle(titl,st[io]);
+ 		               		 mtitle(id,st[io]); 		                	 
  		                   }
  		                }
  		            } 					
 				}
  			});
-
  		}
  	}
  </script>
@@ -106,9 +102,7 @@ function newJson1(){
     function viewTab(s1){
     	var s=s1;
 		var arr = $('#par1').attr('value');
-
         var json = JSON.parse(arr);
-
         var oldTable = document.getElementById('mattTable'),
                 newTable = oldTable.cloneNode();
         var tr = document.createElement('tr');
@@ -141,13 +135,14 @@ function newJson1(){
                 var id = "td" + i+"s" + j;
                 td.id = id;
                 td.appendChild(document.createTextNode(json[3][i]));
+                td.title=" ";
                 if(json[4][i][j]==0) {
                     td.style.backgroundColor = "green";
                     td.style.cursor = "pointer";
                     td.setAttribute("onClick", "changeColor(id)");
                     td.style.cursor = "pointer";
                 }
-               if(json[4][i][j]==2) {
+               if(json[4][i][j]>=2) {
                     td.style.backgroundColor = "yellow";
                     td.style.cursor = "pointer";
                     td.setAttribute("onClick", "changeColor(id)");
@@ -253,9 +248,8 @@ function newJson1(){
 		else {document.getElementById("next").disabled= true;}
 		document.getElementById("txtback").value=0;
 		document.getElementById("back").disabled= true;
-	    document.getElementById("art").scrollTop = 200;
+	    document.getElementById("art").scrollTop = 600;
 	}</script>
-
 </head>
 <body onload="myLoad()">
 <div class="header">
@@ -295,8 +289,7 @@ function newJson1(){
                  		$('#par1').attr('value', JSON.stringify(json));
                    }
                 }
-            }
-            
+            }         
      		var ng=document.getElementById("nguest").value;
      		var st=document.getElementById("guest").value;
      		st=st.substr(1);
@@ -307,6 +300,7 @@ function newJson1(){
      			$.ajax({
      				url : "guestJson",
      				data : data1,
+     				async: false,
      				type : "GET",
      				success : function(gjson) {
      					var mjson=JSON.parse(gjson);
@@ -314,7 +308,7 @@ function newJson1(){
      		               for(var j = 0; j < json[2].length; j++){
      		                   if(json[4][i][j]>1 && mjson[4][i][j]==0) {
      		                 		json[4][i][j]=json[4][i][j]+1;
-     		                 		if (json[4][i][j]==ng+2) json[4][i][j]=1;
+     		                 		if (json[4][i][j]==parseInt(ng)+2) json[4][i][j]=0;
      		                 		$('#par1').attr('value', JSON.stringify(json));
      		                	   
      		                   }
@@ -322,9 +316,7 @@ function newJson1(){
      		            } 					
     				}
      			});
-
      		}
-
             viewTab(0);   
             appoint(0);
             </script>
