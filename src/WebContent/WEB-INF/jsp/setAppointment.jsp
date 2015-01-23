@@ -77,7 +77,7 @@ function newJson1(){
  		var st=document.getElementById("guest").value;
  		st=st.substr(1);
  		st=st.slice(0,-1);
- 		st = st.split(",");
+ 		st = st.split(", ");
  		
  		for (var io=0;io<st.length;io++){
  			var data1="guest="+encodeURIComponent(st[io]);
@@ -254,7 +254,6 @@ function newJson1(){
 		document.getElementById("txtback").value=0;
 		document.getElementById("back").disabled= true;
 	    document.getElementById("art").scrollTop = 200;
-	    appoint();
 	}</script>
 
 </head>
@@ -302,7 +301,7 @@ function newJson1(){
      		var st=document.getElementById("guest").value;
      		st=st.substr(1);
      		st=st.slice(0,-1);
-     		st = st.split(",");
+     		st = st.split(", ");
      		for (var io=0;io<st.length;io++){
      			var data1="guest="+encodeURIComponent(st[io]);
      			$.ajax({

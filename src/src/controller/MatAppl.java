@@ -309,9 +309,11 @@ private Date endDate(Date date) {
 public @ResponseBody  void ajaxjson(@RequestParam(value = "mattjson", required = false) String mattjson){
 		newTablJSON=mattjson;
 }
-@RequestMapping(value = "guestJson", method = RequestMethod.POST)
+@RequestMapping(value = "guestJson", method = RequestMethod.GET)
 public @ResponseBody  String guestJson(@RequestParam(value = "guest", required = false) String guest){
 	String gjson=guestsJsons.get(guest);	
+	System.out.println(guest);
+	System.out.println(gjson);
 	return gjson;
 }
 @RequestMapping(value = "nWek", method = RequestMethod.GET)
@@ -571,6 +573,8 @@ public String download(HttpServletRequest request,@RequestParam ("table") String
 		  guestsJsons=ifesbes1.getCheckedGuestsMatts(tableId);
 		  model.addAttribute("nguest", guestsJsons.keySet().size());
 		  model.addAttribute("guest", guestsJsons.keySet());
+		  System.out.println(guestsJsons.keySet());
+		  System.out.println(guestsJsons.keySet().size());
 /*		 
 		  Set<String> stringSet = new LinkedHashSet<String>();
 		  stringSet.add("gel_82@mail.ru");
