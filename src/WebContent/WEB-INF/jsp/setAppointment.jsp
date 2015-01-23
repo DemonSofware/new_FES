@@ -6,7 +6,7 @@
     <meta name="generator" content="CoffeeCup Web Editor (www.coffeecup.com)">
     <meta name="description" content="">
     <meta name="keywords" content="">
-    <title>Save</title>
+    <title>SetAppointment</title>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="resources/stylemat.css" />
     <script src="//code.jquery.com/jquery-1.10.2.js"></script> 
@@ -53,7 +53,7 @@ function newJson1(){
 			var mbuf=buf;
 			if (mbuf>0){document.getElementById("txtnext").value=mbuf;	
 						document.getElementById("next").disabled= false;
-						document.getElementById("mRepeat").disabled=true;}//false;}
+						document.getElementById("mRepeat").disabled=false;}
 			else {document.getElementById("next").disabled= true;}
 			document.getElementById("txtback").value=0;
 			document.getElementById("back").disabled= true;
@@ -61,6 +61,47 @@ function newJson1(){
 	});
 }
     </script> 
+    <script type="text/javascript">
+    function mtitle(titl,txt){
+    	var buf= new Srting();
+    	buf=titl+"\n"+txt;
+    	return buf;
+    }
+    </script>
+ <script type="text/javascript">
+ 	function appoint(s1){
+		var arr = $('#par1').attr('value');
+		var json = JSON.parse(arr);
+ 		var s=s1;
+ 		var ng=document.getElementById("nguest").value;
+ 		var st=document.getElementById("guest").value;
+ 		st=st.substr(1);
+ 		st=st.slice(0,-1);
+ 		st = st.split(",");
+ 		
+ 		for (var io=0;io<st.length;io++){
+ 			var data1="guest="+encodeURIComponent(st[io]);
+ 			$.ajax({
+ 				url : "guestJson",
+ 				data : data1,
+ 				type : "GET",
+ 				success : function(gjson) {
+ 					var mjson=JSON.parse(gjson);
+ 		            for(var i = 0; i < json[3].length; i++){
+ 		               for(var j = s; j < json[2].length && j<s+7; j++){
+ 		                   if(json[4][i][j]>1 && mjson[4][i][j]==1) {
+ 		                	 var id = "td" + i+"s" + j;	
+ 		                	 var titl=document.getElementById(arg).title;
+ 		                	 document.getElementById(arg).title=mtitle(titl,st[io]);
+ 		                   }
+ 		                }
+ 		            } 					
+				}
+ 			});
+
+ 		}
+ 	}
+ </script>
     <script>
     function viewTab(s1){
     	var s=s1;
@@ -85,8 +126,6 @@ function newJson1(){
             var id = "th" + i;
             th1.id = id;
             th1.appendChild(document.createTextNode(json[1][i]));
-            //th1.style.cursor = "pointer";
-            th1.setAttribute("onClick", "changeWek(this.id)");
             tr1.appendChild(th1);
         }
 	       newTable.appendChild(tr1);
@@ -130,9 +169,10 @@ function newJson1(){
   	  document.getElementById("txtnext").value=x;
   	  document.getElementById("txtback").value=y;
   	  viewTab(y*7);
+  	  appoint(y*7);
   	  if(x>0)document.getElementById("next").disabled=false;
   	  if(y==0){document.getElementById("back").disabled=true;
-			document.getElementById("mRepeat").disabled=true;}//false;}
+			document.getElementById("mRepeat").disabled=false;}
     }
     </script>
     <script>
@@ -143,7 +183,8 @@ function newJson1(){
 	  y++;
 	  document.getElementById("txtnext").value=x;
 	  document.getElementById("txtback").value=y;
-	  viewTab(y*7);	  
+	  viewTab(y*7);	 
+	  appoint(y*7);
 	  if(x==0)document.getElementById("next").disabled=true;
 	  if(y>0){document.getElementById("back").disabled=false;
 			document.getElementById("mRepeat").disabled=true;}
@@ -167,54 +208,6 @@ function newJson1(){
               }
           }
 	  }
-  }
-  </script>
-  <script type="text/javascript">
-  function changeWek(arg){
- 	 var arr = $('#par1').attr('value');
- 	 var json = JSON.parse(arr);
-      var j = arg.slice(2);
-      var wekbuf=1;
-      if(document.getElementById("mRepeat").checked && !document.getElementById("mRepeat").disabled){
-     	 wekbuf=document.getElementById("txtnext").value;
-     	 wekbuf++;
-      }		
-      if (document.getElementById(arg).style.backgroundColor == "yellow"){
-    	  document.getElementById(arg).style.backgroundColor = "#f0f0f0"
-      }/* else{
-    	  document.getElementById(arg).style.backgroundColor = "yellow" 
-      } */
-          for(var i = 0; i < json[3].length; i++){
-         	var id1 = "td" + i + "s" + j;
-         	var cell = document.getElementById(id1);
-          	if(cell.style.backgroundColor == "yellow" && document.getElementById(arg).style.backgroundColor != "yellow"){
-         		cell.style.backgroundColor = "#f0f0f0";
-         		cell.style.cursor =" ";
-          		for (var x1=0;x1<wekbuf;x1++){
-          		var j1=parseInt(j)+x1*7;
-         		json[4][i][j1]=1;
-          		$('#par1').attr('value', JSON.stringify(json));}
-          		}else{
-          	if(cell.style.backgroundColor != "green" && document.getElementById(arg).style.backgroundColor == "yellow"){
-          		cell.style.backgroundColor = "yellow"
-          		cell.setAttribute("onClick", "changeColor(id)");
-          		cell.style.cursor = "pointer";
-          		for(var x1=0;x1<wekbuf;x1++){
-          		var j1=parseInt(j)+x1*7;
-          		json[4][i][j1]=2;
-          		$('#par1').attr('value', JSON.stringify(json));}
-         		}}
-          	/* if(cell.style.backgroundColor=="green" && document.getElementById(arg).style.backgroundColor != "yellow"){
-         		cell.style.backgroundColor = "#f0f0f0";
-         		cell.style.cursor =" ";
-          		for (var x1=0;x1<wekbuf;x1++){
-          		var j1=parseInt(j)+x1*7;
-         		json[4][i][j1]=1;
-          		$('#par1').attr('value', JSON.stringify(json));}
-         		} */
-          	
-          }
-	  
   }
   </script>
   <script type="text/javascript">
@@ -255,12 +248,13 @@ function newJson1(){
 		var mbuf=document.getElementById("txtnext").value;
 		if (mbuf>0){document.getElementById("txtnext").value=mbuf;	
 					document.getElementById("next").disabled= false;
-					document.getElementById("mRepeat").disabled=true;//false;
+					document.getElementById("mRepeat").disabled=false;
 					document.getElementById("mRepeat").checked=true;}
 		else {document.getElementById("next").disabled= true;}
 		document.getElementById("txtback").value=0;
 		document.getElementById("back").disabled= true;
 	    document.getElementById("art").scrollTop = 200;
+	    appoint();
 	}</script>
 
 </head>
@@ -282,6 +276,8 @@ function newJson1(){
  			  <input id="par1" name="mattToJSON" value='${matJSON}' type=hidden style="display:none"/>
               <input id="txtback" name="txtback" value=0 type=hidden style="display:none" />
  			  <input id="txtnext" name="txtnext" value='${nWek}' type=hidden style="display:none" /> 
+ 			  <input id="nguest" name="nguest" value='${nguest}' type=hidden style="display:none" />
+ 			  <input id="guest" name="guest" value='${guest}' type=hidden style="display:none" /> 
  			<div>
             <table id="mattTable"  >
             </table>
@@ -291,7 +287,47 @@ function newJson1(){
             </table>
             </div>
             <script>
-            viewTab(0);           
+    		var arr = $('#par1').attr('value');
+            var json = JSON.parse(arr);
+            for(var i = 0; i < json[3].length; i++){
+               for(var j = 0; j < json[2].length; j++){
+                   if(json[4][i][j]==0) {
+                 		json[4][i][j]=2;
+                 		$('#par1').attr('value', JSON.stringify(json));
+                   }
+                }
+            }
+            
+     		var ng=document.getElementById("nguest").value;
+     		var st=document.getElementById("guest").value;
+     		st=st.substr(1);
+     		st=st.slice(0,-1);
+     		st = st.split(",");
+     		for (var io=0;io<st.length;io++){
+     			var data1="guest="+encodeURIComponent(st[io]);
+     			$.ajax({
+     				url : "guestJson",
+     				data : data1,
+     				type : "GET",
+     				success : function(gjson) {
+     					var mjson=JSON.parse(gjson);
+     		            for(var i = 0; i < json[3].length; i++){
+     		               for(var j = 0; j < json[2].length; j++){
+     		                   if(json[4][i][j]>1 && mjson[4][i][j]==0) {
+     		                 		json[4][i][j]=json[4][i][j]+1;
+     		                 		if (json[4][i][j]==ng+2) json[4][i][j]=1;
+     		                 		$('#par1').attr('value', JSON.stringify(json));
+     		                	   
+     		                   }
+     		                }
+     		            } 					
+    				}
+     			});
+
+     		}
+
+            viewTab(0);   
+            appoint(0);
             </script>
         </div>
     </div>
@@ -304,37 +340,7 @@ function newJson1(){
             </div>
                 <p>Starting date <input type="text" id="startDate" disabled name="startDate" value='${startDate}' style="border: none; color: blue; background: #d6f000; font-size: 0.8em; float: right; width: 120px; text-align: right;  "></p>
                 <p>Ending date<input type="text" id="endDate" disabled name="endDate" value='${endDate}' style="border: none; color: blue; background: #d6f000; font-size: 0.8em; float: right; width: 120px; text-align: right; "></p>
-               <script>
-    var dates = $("#startDate").datepicker({
-      defaultDate: "+1w",
-      changeMonth: true,
-      numberOfMonths: 1,
-      dateFormat: "dd.mm.yy",
-      onSelect: function(selectedDate){
-        var option = this.id == "startDate" ? "minDate" : "maxDate",
-        instance = $( this ).data( "datepicker" ),
-        date = $.datepicker.parseDate(
-          instance.settings.dateFormat || $.datepicker._defaults.dateFormat,
-          selectedDate, instance.settings);
-        dates.not(this).datepicker("option", option, date);
-        newJson1();}
-    });
-    var dates = $("#endDate").datepicker({
-        defaultDate: "+1w",
-        changeMonth: true,
-        numberOfMonths: 1,
-        dateFormat: "dd.mm.yy",
-        onSelect: function(selectedDate){
-          var option = this.id == "endDate" ? "minDate" : "maxDate",
-          instance = $( this ).data( "datepicker" ),
-          date = $.datepicker.parseDate(
-            instance.settings.dateFormat || $.datepicker._defaults.dateFormat,
-            selectedDate, instance.settings);
-          dates.not(this).datepicker("option", option, date);
-          newJson1();}
-      });
-  </script> 
-            <p>Time slot 	<select id="timeSlot" name="timeSlot" disabled onchange="newJson1()" style="margin-left: 20px; float:right; vertical-align: text-bottom; width: 75px">
+            <p>Time slot 	<select id="timeSlot" name="timeSlot" disabled style="margin-left: 20px; float:right; vertical-align: text-bottom; width: 75px">
                 <option value="15" ${ts15}>15 min</option>
                 <option value="30" ${ts30}>30 min</option>
                 <option value="60" ${ts60}>1 hour</option>

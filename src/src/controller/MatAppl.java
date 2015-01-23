@@ -37,6 +37,7 @@ public class MatAppl {
 	Matt oldMatt=null;
 	Matt newMatt=null;
 	ArrayList<Boolean> newTabList;	
+	HashMap<String, String> guestsJsons;
 //--------------------------------------------SZE
 	
 	private Person user;
@@ -308,6 +309,11 @@ private Date endDate(Date date) {
 public @ResponseBody  void ajaxjson(@RequestParam(value = "mattjson", required = false) String mattjson){
 		newTablJSON=mattjson;
 }
+@RequestMapping(value = "guestJson", method = RequestMethod.POST)
+public @ResponseBody  String guestJson(@RequestParam(value = "guest", required = false) String guest){
+	String gjson=guestsJsons.get(guest);	
+	return gjson;
+}
 @RequestMapping(value = "nWek", method = RequestMethod.GET)
 public @ResponseBody  String nWek(@RequestParam(value = "dateStr", required = false) String dateStr,
 		@RequestParam(value = "dateEnd", required = false) String dateEnd){
@@ -562,7 +568,19 @@ public String download(HttpServletRequest request,@RequestParam ("table") String
 		  int timeSlotStr=oldMatt.getData().getTimeSlot();
 		  String dateStr =new SimpleDateFormat("d.M.y").format(oldMatt.getData().getStartDate());		  
 		  String dateEnd = new SimpleDateFormat("d.M.y").format(getDateAfter(oldMatt.getData().getStartDate(), oldMatt.getData().getnDays()));
-		  model.addAttribute("matJSON", mattToJson4URL);
+		  guestsJsons=ifesbes1.getCheckedGuestsMatts(tableId);
+		  model.addAttribute("nguest", guestsJsons.keySet().size());
+		  model.addAttribute("guest", guestsJsons.keySet());
+/*		 
+		  Set<String> stringSet = new LinkedHashSet<String>();
+		  stringSet.add("gel_82@mail.ru");
+		  stringSet.add("artemgeletuk@gmail.com");
+		  stringSet.add("nata_84@mail.ru");
+		  stringSet.add("demoniskatel@gmail.com");
+		  model.addAttribute("guest", stringSet);
+		  model.addAttribute("nguest", stringSet.size());
+		  
+*/		  model.addAttribute("matJSON", mattToJson4URL);
 		  model.addAttribute("userName", userName);
 		  model.addAttribute("name", m_nameMatt);
 		  model.addAttribute("nWek", m_nwek);
