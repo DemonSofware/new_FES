@@ -41,8 +41,8 @@ public class MatAppl {
 //--------------------------------------------SZE
 	
 	private Person user;
-	static private int GMT_TIME_ZONE=41;
-	private double[] timeShifts = {-12,-11,-10,-9,-8,-8,-7,-7,-7,-6,-6,-6,-6,-5,-5,-5,-4,-4,-4,-4,-3.5,-3,-3,-3,-3,-2,-1,-1,0,0,1,1,1,1,1,2,2,2,2,2,2,2,2,2,3,3,3,3,3.5,4,4,4,4.5,5,5,5.5,5.5,5.75,6,6,6.5,7,7,8,8,8,8,8,9,9,9,9.5,9.5,10,10,10,10,10,11,12,12,13};
+	static private TimeZone GMT_TIME_ZONE = TimeZone.getTimeZone("GMT");
+//	private double[] timeShifts = {-12,-11,-10,-9,-8,-8,-7,-7,-7,-6,-6,-6,-6,-5,-5,-5,-4,-4,-4,-4,-3.5,-3,-3,-3,-3,-2,-1,-1,0,0,1,1,1,1,1,2,2,2,2,2,2,2,2,2,3,3,3,3,3.5,4,4,4,4.5,5,5,5.5,5.5,5.75,6,6,6.5,7,7,8,8,8,8,8,9,9,9,9.5,9.5,10,10,10,10,10,11,12,12,13};
 	
 	@Autowired
 	IFesBes1 ifesbes1;
@@ -159,7 +159,14 @@ public class MatAppl {
 	     model.addAttribute("username", userName);
 	     model.addAttribute("name", m_name);
 	     model.addAttribute("email", userEmail);
-	     model.addAttribute("tz"+user.getTimeZone(), "selected");
+	     model.addAttribute("tz"+user.getTimeZone().getID().replace('/', '_').replace('+', '_'), "selected");
+//**********************************************************************************
+/*String[] avTZ = TimeZone.getAvailableIDs();
+for(int i = 0; i<avTZ.length; i++){
+	System.out.print(TimeZone.getTimeZone(avTZ[i]).getRawOffset()/3600000+"     "+TimeZone.getTimeZone(avTZ[i]).getID()+"     ");
+	
+	System.out.println(TimeZone.getTimeZone(avTZ[i]).getDisplayName());
+}*/
 	     return "account_settings";
 	}
 	@RequestMapping({"/resauto"})
@@ -182,11 +189,8 @@ public class MatAppl {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String password1 = request.getParameter("password1");
-		String timeZoneStr = request.getParameter("timeZone");
-		if(timeZoneStr!=null) {
-			int timeZone = Integer.parseInt(timeZoneStr);
-			user.setTimeZone(timeZone);
-		}
+		String timeZoneId = request.getParameter("timeZone");
+		user.setTimeZone(TimeZone.getTimeZone(timeZoneId));
 		if(name!=null && !name.equals("")) user.setName(name);
 		if(email!=null && email.contains("@")) user.setEmail(email);
 		if(password!=null && !password.equals("") && password.equals(password1))
