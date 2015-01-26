@@ -536,7 +536,7 @@ public String download(HttpServletRequest request,@RequestParam ("table") String
 	@RequestMapping({"/send"})
 	public String sendEmail(@RequestParam ("table") String table,@RequestParam ("hiddenemail") String hiddenemail,Model model){
 	    String[] sendEmails = hiddenemail.split(";");
-	    String send= "http://localhost:8080/myavailabletime/viewMatt?table="+table+"&username="+userName;
+	    String send= "http://ec2-54-166-51-117.compute-1.amazonaws.com:8080/myavailabletime/viewMatt?table="+table+"&username="+userName;
 	    connector.shareByMail(send.replaceAll(" ", "%20"), sendEmails, userName, IFrontConnector.GOOGLE);	
 		return homereturn(model);
 	}

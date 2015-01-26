@@ -7,12 +7,12 @@
 
 <!-- <bean id="ifesbes1" class="model.test"/> -->
 <bean id="ifesbes1" class="org.springframework.remoting.caucho.BurlapProxyFactoryBean">
-<property name="serviceUrl" value="http://localhost:8080/MAT_BES1/bes1_service.service"></property>
+<property name="serviceUrl" value="http://ec2-54-166-51-117.compute-1.amazonaws.com:8080/MAT_BES1/bes1_service.service"></property>
 <property name="serviceInterface" value="mat.IFesBes1"></property>
 </bean>
 
 <bean id="connector" class="org.springframework.remoting.caucho.BurlapProxyFactoryBean">
-<property name="serviceUrl" value="http://localhost:8080/MAT_BES2/front_connector.service1"></property>
+<property name="serviceUrl" value="http://ec2-54-166-51-117.compute-1.amazonaws.com:8080/MAT_BES2/front_connector.service1"></property>
 <property name="serviceInterface" value="mat.IFrontConnector"></property>
 </bean>
 
