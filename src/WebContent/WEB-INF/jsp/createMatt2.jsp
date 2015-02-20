@@ -14,7 +14,54 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
-    
+  <script>
+  $(document).ready(init);
+  $( "#mattTable1 > *").click( function () {
+	  	var arg=$(this).attr("id");
+	  	var arr = $('#par1').attr('value');
+	  	var json = JSON.parse(arr);
+	      var i = arg.slice(2,4);
+	      i=i.replace ( /[^\d.]/g, '' );	
+	      var j = arg.slice(4);
+	      j=j.replace ( /[^\d.]/g, '' );	   	                
+	      var cell = document.getElementById(arg);
+	      var wekbuf=1;
+	      if(document.getElementById("mRepeat").checked && !document.getElementById("mRepeat").disabled){
+	     	 wekbuf=document.getElementById("txtnext").value;
+	     	 wekbuf++;
+	      }		
+	      if(cell.style.backgroundColor == "rgb(240, 240, 240)")
+	      {
+	          cell.style.backgroundColor = "green";
+	          for (var x1=0;x1<wekbuf;x1++){
+	      			var j1=parseInt(j)+x1*7;
+	          		json[4][i][j1]=0;
+	          		$('#par1').attr('value', JSON.stringify(json));}
+	      }
+	      else {
+	          cell.style.backgroundColor = "rgb(240, 240, 240)";
+	          for (var x1=0;x1<wekbuf;x1++){
+	      			var j1=parseInt(j)+x1*7;
+	          		json[4][i][j1]=1;
+	          		$('#par1').attr('value', JSON.stringify(json));}
+	      }  
+	  });
+  $('td').click();
+  function init(){
+  $(function() {
+    $( "#mattTable1" ).selectable({
+    	distance:10,
+    	stop: function() {
+        $( "td.ui-selected", this ).each(function() {
+        	$( this ).click();
+        });
+      }
+    });
+  });
+  };
+ 
+  </script>
+  
 <script type="text/javascript">
 function save(){
 	var json=document.getElementById("par1").value;
@@ -43,6 +90,7 @@ function newJson1(){
 		success : function(mattToJSON) {
 			document.getElementById("par1").value=mattToJSON;
 			viewTab(0);
+			  $(document).ready(init);
 		}
 	});
 	var data1="dateStr="+encodeURIComponent(dateStr)+"&dateEnd="+encodeURIComponent(dateEnd);
@@ -86,8 +134,6 @@ function newJson1(){
             var id = "th" + i;
             th1.id = id;
             th1.appendChild(document.createTextNode(json[1][i]));
-            th1.style.cursor = "pointer";
-            th1.setAttribute("onClick", "changeWek(this.id)");
             tr1.appendChild(th1);
         }
 	       newTable.appendChild(tr1);
@@ -105,16 +151,20 @@ function newJson1(){
                 td.appendChild(document.createTextNode(json[3][i]));
                 if(json[4][i][j]==0) {
                     td.style.backgroundColor = "green";
-                    td.style.cursor = "pointer";
                     td.setAttribute("onClick", "changeColor(id)");
                     td.style.cursor = "pointer";
                 }
                 if(json[4][i][j]==2) {
                     td.style.backgroundColor = "yellow";
-                    td.style.cursor = "pointer";
                     td.setAttribute("onClick", "changeColor(id)");
                     td.style.cursor = "pointer";
                 }
+                if(json[4][i][j]==1) {
+                    td.style.backgroundColor = "#f0f0f0";
+                    td.setAttribute("onClick", "changeColor(id)");
+                    td.style.cursor = "pointer";
+                }
+                
                 tr.appendChild(td);
             }
             newTable.appendChild(tr);
@@ -131,6 +181,7 @@ function newJson1(){
   	  document.getElementById("txtnext").value=x;
   	  document.getElementById("txtback").value=y;
   	  viewTab(y*7);
+  	  $(document).ready(init);
   	  if(x>0)document.getElementById("next").disabled=false;
   	  if(y==0){document.getElementById("back").disabled=true;
 			document.getElementById("mRepeat").disabled=false;}
@@ -144,7 +195,8 @@ function newJson1(){
 	  y++;
 	  document.getElementById("txtnext").value=x;
 	  document.getElementById("txtback").value=y;
-	  viewTab(y*7);	  
+	  viewTab(y*7);
+	  $(document).ready(init);
 	  if(x==0)document.getElementById("next").disabled=true;
 	  if(y>0){document.getElementById("back").disabled=false;
 			document.getElementById("mRepeat").disabled=true;}
@@ -206,6 +258,7 @@ function newJson1(){
   }
   </script>
   <script type="text/javascript">
+  
   function changeColor(arg) {
   	var arr = $('#par1').attr('value');
   	var json = JSON.parse(arr);
@@ -219,16 +272,7 @@ function newJson1(){
      	 wekbuf=document.getElementById("txtnext").value;
      	 wekbuf++;
       }		
-      if(cell.style.backgroundColor == "green")
-      {
-          cell.style.backgroundColor = "yellow";
-          for (var x1=0;x1<wekbuf;x1++){
-        		var j1=parseInt(j)+x1*7;
-          		json[4][i][j1]=2;
-         		$('#par1').attr('value', JSON.stringify(json));}
-      }
-      else if
-              (cell.style.backgroundColor == "yellow")
+      if(cell.style.backgroundColor == "rgb(240, 240, 240)")
       {
           cell.style.backgroundColor = "green";
           for (var x1=0;x1<wekbuf;x1++){
@@ -236,6 +280,13 @@ function newJson1(){
           		json[4][i][j1]=0;
           		$('#par1').attr('value', JSON.stringify(json));}
       }
+      else {
+          cell.style.backgroundColor = "rgb(240, 240, 240)";
+          for (var x1=0;x1<wekbuf;x1++){
+      			var j1=parseInt(j)+x1*7;
+          		json[4][i][j1]=1;
+          		$('#par1').attr('value', JSON.stringify(json));}
+      }  
   }
   </script>
 <script type="text/javascript">
@@ -282,8 +333,8 @@ function m_submit(){
   <script>
   function myFunction() {
 	    var elmnt = document.getElementById("art");
-	    elmnt.scrollTop = 600;
-	}
+	    elmnt.scrollTop = 0;
+}
   </script>
 
 </head>
@@ -315,55 +366,7 @@ function m_submit(){
             </table>
             </div>
             <script>
-                var arr = $('#par1').attr('value');
-                var json = JSON.parse(arr);
-                var oldTable = document.getElementById('mattTable'),
-                        newTable = oldTable.cloneNode();
-                var tr = document.createElement('tr');
-                tr.id = "dayValue";
-                for(var i = 0; i < json[2].length; i++){
-                    var th = document.createElement('th');
-                    th.appendChild(document.createTextNode(json[2][i]));
-                    tr.appendChild(th);
-                }
-                newTable.appendChild(tr);
-             
-                var tr1 = document.createElement('tr');
-		        for(var i = 0; i < json[1].length; i++){
-		            var th1 = document.createElement('td');
-		            var id = "th" + i;
-                    th1.id = id;
-		            th1.appendChild(document.createTextNode(json[1][i]));
-		            th1.style.cursor = "pointer";
-		            th1.setAttribute("onClick", "changeWek(id)");
-		            th1.style.cursor = "pointer";
-		            tr1.appendChild(th1);
-		        }
- 		       newTable.appendChild(tr1);
- 		      oldTable.parentNode.replaceChild(newTable, oldTable);
- 		      
- 		      var oldTable = document.getElementById('mattTable1'),
-            	 newTable = oldTable.cloneNode();
-
-                for(var i = 0; i < json[3].length; i++){
-                    var tr = document.createElement('tr');
-                    for(var j = 0; j < json[2].length; j++){
-                        var td = document.createElement('td');
-                        var id = "td" + i +"s"+ j;
-                        td.id = id;
-                        td.appendChild(document.createTextNode(json[3][i]));
-                        if(json[4][i][j]==0) {
-                            td.style.backgroundColor = "green";
-                            td.style.cursor = "pointer";
-                            td.setAttribute("onClick", "changeColor(id)");
-                            td.style.cursor = "pointer";
-                        }
-                        tr.appendChild(td);
-                    }
-                    newTable.appendChild(tr);
-                }
-                oldTable.parentNode.replaceChild(newTable, oldTable);
-            
+            viewTab(0);
             </script>
         </div>
     </div>
