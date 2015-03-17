@@ -1,0 +1,149 @@
+       head {
+            width: auto;
+        }
+        body {
+            width: auto;
+            background:#f0f0f0;
+            margin-left: auto;
+            margin-right: auto;
+			              -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+        }
+        .header {
+            font-family: Arial, Helvetica, sans-serif;
+            background: black;
+            width: auto;
+            height: auto;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .topmenu {
+            display: inline-block;
+            text-align:;
+            color: white;
+            padding: 10px 19px 10px 0px;
+            font-weight:100;
+            font-size: 0.9em}
+        .logo {
+            display: inline-block;
+            text-align:left;
+            color: white;
+            padding: 10px 0px 7px 19px;
+        }
+        a.logo:link{
+            text-decoration:none;
+            color:#ffffff;
+        }
+        a.logo:hover{
+            text-decoration:none;
+            color:#e9e9e9;
+        }
+        a.logo:active{
+            text-decoration:none;
+            color:#e0e0e0;
+        }
+        a.logo:visited{
+            text-decoration:none;
+            color:#ffffff;
+        }
+        p {
+            font-size: 0.6em;
+        }
+        #wrapper {
+            width: 100%;
+            overflow: hidden; /* will contain if #first is longer than #second */
+        }
+        #first {
+            width: 15%;
+            float:left; /* add this */
+        }
+        #secondold {
+            overflow: hidden; /* if you don't want #second to wrap below #first */
+            background: #d6f000;
+        }
+        #second {
+            width: 85%; 
+            height: 100%;
+            float: right;
+  
+			border-radius: 8px;
+            box-shadow: 0 0 10px ;
+        }
+        .left {
+            text-align: left;
+            padding:0px 20px 0 20px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 1.6em;
+      
+        }
+        .right {
+            text-align: left;
+            padding:0px 20px 0 20px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 1.6em;
+       
+        }
+        #shareembedemail {
+            display: inline-block;
+            text-align: center;
+        }
+      
+        #mattTable1
+        {
+    border-collapse: separate; 
+    width: 100%;
+    border-spacing: 10px 8px;
+ 
+        }
+        #mattTable1 th
+        {
+    font-weight: bold;
+    padding: 8px 8px;
+    
+
+        }
+        #mattTable1 td
+        {
+    border: 6px double white;
+	border-radius: 6px;
+    padding: 10px 10px;
+    text-align: center;
+	box-shadow: 0 0 2px rgba(0,0,0,4);
+        }
+        
+        #mattTable
+        {
+    border-collapse: separate; 
+    width: 100%;
+    margin: 2% 0;
+    border-spacing: 6px 4px;
+    border: 6px double white;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(0,0,0,5);
+    background: linear-gradient(to top, #d7df01, #c8fe2e);
+    
+        }
+        #mattTable th
+        {
+    font-weight: bold;
+    font-family: arial;
+    padding: 10px 10px;
+	
+    
+        }
+        #mattTable td
+        {
+    border: 6px double white;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(0,0,0,5);
+    padding: 10px 10px;
+    text-align: center;
+    
+        }
+
+        #art::-webkit-scrollbar { width: 0 !important }

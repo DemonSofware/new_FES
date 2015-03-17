@@ -49,11 +49,11 @@ public class MatAppl {
 	@Autowired
 	IFrontConnector connector;
 	
-	@RequestMapping({"/"})
+/*	@RequestMapping({"/"})
 	public String login() {
-		return "loginon";
+		return "newloginon";
 	}
-
+*/
 	@RequestMapping({"/buf"})
 	public String buf(@RequestParam ("tablename") String firstName,Model model) {
 		model.addAttribute("buf", firstName);
@@ -119,7 +119,7 @@ public class MatAppl {
 	   return "invitations";
 	  }
 //-----------------Account settings
-	@RequestMapping({"/accountsettings"})
+/*	@RequestMapping({"/accountsettings"})
 	public String accountSettings (Model model) {
 		 String[] dataGoogle = new String[0];
 		 String[] authorizedSN = null;
@@ -162,7 +162,7 @@ public class MatAppl {
 	     model.addAttribute("tz"+user.getTimeZone(), "selected");
 	     return "account_settings";
 	}
-	@RequestMapping({"/resauto"})
+*//*	@RequestMapping({"/resauto"})
 	 public String resultAuthorization(String code, String access_token, Model model) {
 		if (code!=null) {
 			try {
@@ -174,7 +174,7 @@ public class MatAppl {
 		}
 		return accountSettings(model);
 	}
-	
+	*/
 	@RequestMapping({"/savesettings"})
 	public String saveSettings(HttpServletRequest request, Model model) {
 		int resultSave = -1;
@@ -199,14 +199,14 @@ public class MatAppl {
 		return homereturn (model);
 	}
 //-------------------Create Matt
-	@RequestMapping({"/dom"})
+/*	@RequestMapping({"/dom"})
 	public String dom (Model model) {
 		model.addAttribute("userName",userName);
 		model.addAttribute("name",m_name);
 	return createMatt2(model);
-	}
+	}*/
 	
-	@RequestMapping({"/createMatt2"})
+/*	@RequestMapping({"/createMatt2"})
 	public String createMatt2(Model model){
 	//----for creating MATT from the very beginning----
 		String mattToJSON=null;
@@ -233,7 +233,7 @@ public class MatAppl {
 		model.addAttribute("download",connector.getAvailableCalendars(userName));
 		return "createMatt2";
 	}
-	private HashMap<String, List<String>> getAvailableCalendars(String userName2) {
+*/	private HashMap<String, List<String>> getAvailableCalendars(String userName2) {
 	    HashMap<String, List<String>> hmOne = new HashMap<String, List<String>>();
 	    List<String>l1 = new ArrayList<String>();
 	    l1.add("one");
@@ -305,10 +305,10 @@ private Date endDate(Date date) {
     calendar.add(Calendar.DAY_OF_MONTH, 6);
 	return calendar.getTime();
 	}
-@RequestMapping(value = "ajaxjson", method = RequestMethod.POST)
+/*@RequestMapping(value = "ajaxjson", method = RequestMethod.POST)
 public @ResponseBody  void ajaxjson(@RequestParam(value = "mattjson", required = false) String mattjson){
 		newTablJSON=mattjson;
-}
+}*/
 @RequestMapping(value = "guestJson", method = RequestMethod.GET)
 public @ResponseBody  String guestJson(@RequestParam(value = "guest", required = false) String guest){
 	String gjson=guestsJsons.get(guest);
@@ -332,7 +332,7 @@ public @ResponseBody  String nWek(@RequestParam(value = "dateStr", required = fa
 		String buf=Integer.toString(nWek);
 		return buf;
 }
-@RequestMapping(value = "newJson", method = RequestMethod.GET)
+/*@RequestMapping(value = "newJson", method = RequestMethod.GET)
 public @ResponseBody String newJson(@RequestParam(value = "dateStr", required = false) String dateStr,
 		@RequestParam(value = "dateEnd", required = false) String dateEnd,
 		@RequestParam(value = "timeSlotStr", required = false) String timeSlotStr,
@@ -368,7 +368,7 @@ public @ResponseBody String newJson(@RequestParam(value = "dateStr", required = 
 		  oldMatt.setSlots(newTabList);
 		  mattToJSON = oldMatt.matt2browser();  
 	return mattToJSON;
-}
+}*/
 @RequestMapping({"/createMatt"})
 	public String createMattData(HttpServletRequest request, Model model){
 	//----for creating MATT from the very beginning----
@@ -424,7 +424,7 @@ public String download(HttpServletRequest request,@RequestParam ("table") String
 	return  action_edit(buf,model);
 }
 
-	@RequestMapping({"/saveMatt"})
+/*	@RequestMapping({"/saveMatt"})
 	public String saveMattData(@RequestParam ("table") String m_mattname, Model model){
 		newTabList=new ArrayList<Boolean>();
 		newTabList=Matt.fromBrowser2ArrayList(newTablJSON);
@@ -436,7 +436,7 @@ public String download(HttpServletRequest request,@RequestParam ("table") String
 		ifesbes1.saveMatt(newMatt,userEmail);
 		return  homereturn (model);
     }
-	@RequestMapping({"/saveMattInvitation"})
+*/	@RequestMapping({"/saveMattInvitation"})
 	public String saveMattInvitation(@RequestParam ("idmatt") String idmatt, Model model){
 		newTabList=new ArrayList<Boolean>();
 		newTabList=Matt.fromBrowser2ArrayList(newTablJSON);
@@ -479,8 +479,8 @@ public String download(HttpServletRequest request,@RequestParam ("table") String
 	}
 //--------------------------------------------SZE
 
-	@RequestMapping({"/person"})
-	public String person(@RequestParam ("username_2") String firstName,/*@RequestParam ("lastName") String lastName,*/
+/*	@RequestMapping({"/person"})
+	public String person(@RequestParam ("username_2") String firstName,@RequestParam ("lastName") String lastName,
 			@RequestParam ("email_2") String email,@RequestParam ("create_a_password_2") String password,Model model) {
 		Person pers = new Person(firstName, email, password, GMT_TIME_ZONE);
 		
@@ -489,15 +489,16 @@ public String download(HttpServletRequest request,@RequestParam ("table") String
 			return "registry";}
 		return "loginon";
 	}
-	@RequestMapping({"/homereturn"})
+*/
+/*	@RequestMapping({"/homereturn"})
 	public String homereturn (Model model){
 		model.addAttribute("name",m_name);
 		model.addAttribute("userName",userName);
 		model.addAttribute("email",userEmail);
 		model.addAttribute("matt",ifesbes1.getMattNames(userName));
 		return "home";	
-	}
-	@RequestMapping({"/home"})
+	}*/
+/*	@RequestMapping({"/home"})
 	public String home(@RequestParam ("name") String name,@RequestParam ("password") String password,Model model) {
 		if (ifesbes1.matLogin(name,password)==Response.NO_PASSWORD_MATCHING || ifesbes1.matLogin(name,password)==Response.NO_REGISTRATION || ifesbes1.matLogin(name,password)==Response.IN_ACTIVE){
 			return "loginon";}
@@ -511,19 +512,20 @@ public String download(HttpServletRequest request,@RequestParam ("table") String
 		model.addAttribute("matt",ifesbes1.getMattNames(userName));
 		return "home";
 	}
-	
-	@RequestMapping({"/registry"})
+*/	
+/*	@RequestMapping({"/registry"})
 	public String registry(){
 		return "registry";
 	}
-	@RequestMapping({"/activate"})
+*/	
+/*	@RequestMapping({"/activate"})
 	 public String activate(HttpServletRequest request){
 		String user=request.getParameter("user");
 		String hash=request.getParameter("hash");
 		  ifesbes1.setActive(user,hash);
 	   return "loginon";
 	 }
-	
+*/	
 
 	@RequestMapping({"/mail"})
 	public String mail(@RequestParam ("table") String table,Model model){
@@ -600,12 +602,13 @@ public String download(HttpServletRequest request,@RequestParam ("table") String
 	public @ResponseBody void setMattCalendarSocialseti(@RequestParam(value = "seti", required = false) String seti){
 			ifesbes1.updateMatCalendarInSN(userName, seti);
 	}
-	@RequestMapping(value = "email", method = RequestMethod.GET)
+/*	@RequestMapping(value = "email", method = RequestMethod.GET)
 	public @ResponseBody String setEmail(@RequestParam(value = "email", required = false) String email){
 		StringBuffer buf= new StringBuffer();
 		buf.append(ifesbes1.ifEmailExistsInDB(email));
 		return buf.toString();	
 	}
+*/	
 	@RequestMapping({"/removematt"})
 	public String removeMATT(HttpServletRequest request,Model model){
 		String mattIdStr=request.getParameter("table");
