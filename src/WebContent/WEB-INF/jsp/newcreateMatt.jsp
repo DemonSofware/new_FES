@@ -18,32 +18,23 @@
   $(document).ready(init);
   $( "#mattTable1 > *").click( function () {
 	  	var arg=$(this).attr("id");
-	  	var arr = $('#par1').attr('value');
+	  	var arr=document.getElementById("par1").value;
 	  	var json = JSON.parse(arr);
 	      var i = arg.slice(2,4);
 	      i=i.replace ( /[^\d.]/g, '' );	
 	      var j = arg.slice(4);
 	      j=j.replace ( /[^\d.]/g, '' );	   	                
 	      var cell = document.getElementById(arg);
-	      var wekbuf=1;
-	      if(document.getElementById("mRepeat").checked && !document.getElementById("mRepeat").disabled){
-	     	 wekbuf=document.getElementById("txtnext").value;
-	     	 wekbuf++;
-	      }		
 	      if(cell.style.backgroundColor == "rgb(240, 240, 240)")
 	      {
-	          cell.style.backgroundColor = "green";
-	          for (var x1=0;x1<wekbuf;x1++){
-	      			var j1=parseInt(j)+x1*7;
-	          		json[4][i][j1]=0;
-	          		$('#par1').attr('value', JSON.stringify(json));}
+	          cell.style.backgroundColor = "green";	      			
+	          		json[4][i][j]=0;
+	          		document.getElementById("par1").value=JSON.stringify(json);
 	      }
 	      else {
-	          cell.style.backgroundColor = "rgb(240, 240, 240)";
-	          for (var x1=0;x1<wekbuf;x1++){
-	      			var j1=parseInt(j)+x1*7;
-	          		json[4][i][j1]=1;
-	          		$('#par1').attr('value', JSON.stringify(json));}
+	          cell.style.backgroundColor = "rgb(240, 240, 240)";	        	
+	          		json[4][i][j]=1;
+	          		document.getElementById("par1").value=JSON.stringify(json);
 	      }  
 	  });
   $('td').click();
@@ -59,8 +50,7 @@
     });
   });
   };
- 
-  </script>
+</script>
 
 <script type="text/javascript">
 function save(){
@@ -77,12 +67,25 @@ function save(){
 	});
 	}
 </script>
-
+<script type="text/javascript">
+function upload(){
+	var json=document.getElementById("par1").value;
+	var data ="mattjson="+json;
+	$.ajax({
+		url : "ajaxjson",
+		data : data,
+		type : "POST",
+		complete : function() {
+			document.getElementById("myform").action="upload_matt";
+			document.forms["myform"].submit();
+		}
+	});
+	}
+</script>
     <script>
     function viewTab(s1){
     	var s=s1;
-		var arr = $('#par1').attr('value');
-
+		var arr=document.getElementById("par1").value;
         var json = JSON.parse(arr);
 
         var oldTable = document.getElementById('mattTable'),
@@ -139,10 +142,10 @@ function save(){
             newTable.appendChild(tr);
         }
         oldTable.parentNode.replaceChild(newTable, oldTable);
+
     }
     </script>
-    <script>
-    
+    <script>  
     function mback(){
   	  var x=document.getElementById("wek").value;	 
 	  x--;
@@ -157,7 +160,7 @@ function save(){
 			success : function(mattToJSON) {
 				document.getElementById("par1").value=mattToJSON;
 				viewTab(0);
-
+				 $(document).ready(init);
 			}
 		});	
 
@@ -178,62 +181,35 @@ function save(){
 			success : function(mattToJSON) {
 				document.getElementById("par1").value=mattToJSON;
 				viewTab(0);
-
+				 $(document).ready(init);
 			}
 		});	
 
     }
   </script>
 
- 
-  <script type="text/javascript">
-  
+  <script type="text/javascript">  
   function changeColor(arg) {
-  	var arr = $('#par1').attr('value');
+  	var arr = document.getElementById("par1").value;
   	var json = JSON.parse(arr);
       var i = arg.slice(2,4);
       i=i.replace ( /[^\d.]/g, '' );	
       var j = arg.slice(4);
       j=j.replace ( /[^\d.]/g, '' );	   	                
       var cell = document.getElementById(arg);
-      var wekbuf=1;
-      if(document.getElementById("mRepeat").checked && !document.getElementById("mRepeat").disabled){
-     	 wekbuf=document.getElementById("txtnext").value;
-     	 wekbuf++;
-      }		
       if(cell.style.backgroundColor == "rgb(240, 240, 240)")
       {
-          cell.style.backgroundColor = "green";
-          for (var x1=0;x1<wekbuf;x1++){
-      			var j1=parseInt(j)+x1*7;
-          		json[4][i][j1]=0;
-          		$('#par1').attr('value', JSON.stringify(json));}
+          cell.style.backgroundColor = "green";	
+          		json[4][i][j]=0;
+          		document.getElementById("par1").value=JSON.stringify(json);
       }
       else {
-          cell.style.backgroundColor = "rgb(240, 240, 240)";
-          for (var x1=0;x1<wekbuf;x1++){
-      			var j1=parseInt(j)+x1*7;
-          		json[4][i][j1]=1;
-          		$('#par1').attr('value', JSON.stringify(json));}
+          cell.style.backgroundColor = "rgb(240, 240, 240)"; 		
+          		json[4][i][j]=1;
+          		document.getElementById("par1").value=JSON.stringify(json);
       }  
   }
   </script>
-<script type="text/javascript">
-function mdownload(){
-	var json=document.getElementById("par1").value;
-	var data ="mattjson="+json;
-	$.ajax({
-		url : "ajaxjson",
-		data : data,
-		type : "POST",
-		complete : function() {
-			document.getElementById("myform").action="download";
-			document.forms["myform"].submit();
-		}
-	});
-	}
-</script>
-
 
   <script>
   function myFunction() {
@@ -241,9 +217,27 @@ function mdownload(){
 	    elmnt.scrollTop = 0;
 }
   </script>
-
+		<script type="text/javascript">
+			function sharefn(state){
+				$('#wrap1').show(0);
+					document.getElementById('share1').style.display = state;			
+					document.getElementById('wrap1').style.display = state; 			
+			}			
+		</script>
 </head>
 <body onload="myFunction()">
+	<div onclick="sharefn('none')" id="wrap1"></div>
+
+	<div id="share1">
+	<form action="newmatt">
+			<input type="button" value="X" onclick="sharefn('none')" /><br>
+			<a  id="googleshare" href="https://plus.google.com/share?url=http://ec2-54-166-51-117.compute-1.amazonaws.com:8080/myavailabletime/viewMatt%3Ftable%3D${idmat}%26username%3D${userName}" 
+                onclick=" sharegoogle(); javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><br>
+                <img src="https://www.gstatic.com/images/icons/gplus-32.png" title="Share on Google+" width='30' height='30'/></a><br>
+			
+			 <input id="2" type="submit" value="NEXT" />			
+	</form>
+	</div>
 
 <div class="header">
 <form id="log" >
@@ -257,13 +251,13 @@ function mdownload(){
     <form id=myform>
     <div id="first">
         <div class="left">
-        <input name="home" type="image" src="resources/img/home.png" title="home" onclick="table.value=this.name, tableForm.action='viewMatt'" width='50' height='50'><br>
-       	<input name="edit" type="image" src="resources/img/edit.png" title="edit" onclick="table.value=this.name, tableForm.action='viewMatt'" width='50' height='50'><br>
-       	<input name="share" type="image" src="resources/img/share.png" title="share" onclick="table.value=this.name, tableForm.action='viewMatt'" width='50' height='50'><br>
+        <input name="home" type="image" src="resources/img/home.png" title="home" onclick="myform.action='homereturn'" width='50' height='50'><br>
+       	<input name="edit" type="image" src="resources/img/edit.png" title="edit" onclick="myform.action='action_edit'" width='50' height='50'><br>
+        <img name="share" src="resources/img/share.png" title="share" onclick="sharefn('block')" width='50' height='50' /><br>
        	<input name="collaborate" type="image" src="resources/img/collaborate.png" title="collaborate" onclick="table.value=this.name, tableForm.action='viewMatt'" width='50' height='50'><br>
-       	<input name="upload" type="image" src="resources/img/upload.png" title="upload" onclick="table.value=this.name, tableForm.action='viewMatt'" width='50' height='50'><br>
+       	<input name="upload" type="image" src="resources/img/upload.png" title="upload" onclick="upload()" width='50' height='50'><br>
        	<input name="download" type="image" src="resources/img/download.png" title="download" onclick="table.value=this.name, tableForm.action='viewMatt'" width='50' height='50'><br>
-       	<input id="mRepeat"  name="repeat" type="image" src="resources/img/repeat.png" title="repeat" onclick="repea(this.checked)" width='50' height='50'><br>
+       	<input id="mRepeat"  name="repeat" type="image" src="resources/img/repeat.png" title="repeat" onclick="" width='50' height='50'><br>
        	 <button id="saveMatt" type="button" onclick="save()" >SAVE</button>  	
 		</div>
     </div>

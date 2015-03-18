@@ -70,19 +70,35 @@ function view(state) {
 }
 </script>
 <script type="text/javascript">
-	function subm() {
+	function subm_sing_up() {
 		alert ("Thank you for registering, Please check your email to confirm.");
 		document.forms["form_sing_up"].submit();
 }
 </script>
-<body>
+  <script>
+  function myFunction() {
+		var pas=${reg};
+		if(pas) {document.getElementById('2').disabled = true;
+				document.getElementById('3').disabled = true;
+				document.getElementById('4').disabled = true;
+				document.getElementById('5').disabled = true;}
+		else {document.getElementById('1').disabled = true;
+			view(2);}
+
+}
+  </script>
+
+<body onload="myFunction()">
 
 <div id="wrapper">
     <div id="first">
+    <form action="homereturn">
 	  <input id="1"  type="button" value="Sing Up" onclick="view(this.id)"/><br>
   	  <input id="2"  type="button" value="Profile" onclick="view(this.id)"/><br>
       <input id="3"  type="button" value="Address Book" onclick="view(this.id)"/><br>
       <input id="4"  type="button" value="My networks" onclick="view(this.id)"/><br>
+      <input id="5"  type="submit" value="HOME"/><br>
+    </form>  
     </div>
 
     <div id="second">
@@ -98,11 +114,12 @@ function view(state) {
            <input type="password" name="password" value="" ><br>
 		   <p>Confirm password</p>
 		   <input type="password" name="password1" value="" ><br>
-    	   <input id="button_sing_up"  type="button" value="SAVE" onclick="subm()"/><br>
+    	   <input id="button_sing_up"  type="button" value="SAVE" onclick="subm_sing_up()"/><br>
     	 </form>
  	  </div>
  	  
  	  <div id="profile" style="display: none;">
+ 	  	<form action="savesettings_profile">
            <p>Change name</p>
            <input type="text" name="prof_firstname" value="${prof_firstname}" ><br>
            <p>Change last name</p>
@@ -200,15 +217,21 @@ function view(state) {
 				</select><br>
 		   <p>Select time format</p>
             <table>
-            <input type="radio" name="timeformat" value="">    
- 			<input type="radio" name="timeformat" value=""><br>
- 			12 24<br>
+             <tr>
+			    <td><input type="radio" name="timeformat" disabled value="12"></td>
+			    <td><input type="radio" name="timeformat" checked value="24"><br></td>
+			  </tr>
+			  <tr>
+			    <td>12</td>
+			    <td>24</td>
+			  </tr>
          	</table>
 			
            <p>Phone number(optional)</p>
-           <input type="text" name="prof_firstname" value="${prof_firstname}" ><br>
+           <input type="text" name="prof_phone" value="${prof_phone}" ><br>
 		   
-    	   <input id="buttn_sing_up"  type="button" value="SAVE" onclick=""/><br>
+    	   <input id="buttn_sing_up"  type="submit" value="SAVE" onclick=""/><br>
+    	</form>
  	  </div>
 
  	  <div id="address_book" style="display: none;">
@@ -259,14 +282,7 @@ function view(state) {
 	<input id="par1" name="code" type=hidden />
 	<input id="par2" name="access_token" type=hidden />
 </form>
-        	<input name="home" type="image" src="resources/img/home.png" title="home" onclick="table.value=this.name, tableForm.action='viewMatt'" width='50' height='50'><br>
-       	<input name="edit" type="image" src="resources/img/edit.png" title="edit" onclick="table.value=this.name, tableForm.action='viewMatt'" width='50' height='50'><br>
-       	<input name="share" type="image" src="resources/img/share.png" title="share" onclick="table.value=this.name, tableForm.action='viewMatt'" width='50' height='50'><br>
-       	<input name="collaborate" type="image" src="resources/img/collaborate.png" title="collaborate" onclick="table.value=this.name, tableForm.action='viewMatt'" width='50' height='50'><br>
-       	<input name="upload" type="image" src="resources/img/upload.png" title="upload" onclick="table.value=this.name, tableForm.action='viewMatt'" width='50' height='50'><br>
-       	<input name="download" type="image" src="resources/img/download.png" title="download" onclick="table.value=this.name, tableForm.action='viewMatt'" width='50' height='50'><br>
-       	<input name="repeat" type="image" src="resources/img/repeat.png" title="repeat" onclick="table.value=this.name, tableForm.action='viewMatt'" width='50' height='50'><br>
- 
+
 <script type="text/javascript">
 function signInCallback(authResult) {
   if (authResult['code']) {

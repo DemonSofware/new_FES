@@ -175,7 +175,7 @@ public class MatAppl {
 		return accountSettings(model);
 	}
 	*/
-	@RequestMapping({"/savesettings"})
+/*	@RequestMapping({"/savesettings"})
 	public String saveSettings(HttpServletRequest request, Model model) {
 		int resultSave = -1;
 		String name = request.getParameter("firstname");
@@ -197,7 +197,7 @@ public class MatAppl {
 			model.addAttribute("exception", "don't update profile");
 		}
 		return homereturn (model);
-	}
+	}*/
 //-------------------Create Matt
 /*	@RequestMapping({"/dom"})
 	public String dom (Model model) {
@@ -609,14 +609,14 @@ public String download(HttpServletRequest request,@RequestParam ("table") String
 		return buf.toString();	
 	}
 */	
-	@RequestMapping({"/removematt"})
+/*	@RequestMapping({"/removematt"})
 	public String removeMATT(HttpServletRequest request,Model model){
 		String mattIdStr=request.getParameter("table");
 		int mattId=Integer.parseInt(mattIdStr);
 		ifesbes1.removeMatt(mattId);
 		return homereturn(model);
-	}
-	@RequestMapping({"/action_edit"})
+	}*/
+/*	@RequestMapping({"/action_edit"})
 	public String action_edit (@RequestParam ("table") String mattId4Matt,Model model) {
 		  int tableId=Integer.parseInt(mattId4Matt);
 		  oldMatt=ifesbes1.getMatt(tableId);
@@ -634,14 +634,14 @@ public String download(HttpServletRequest request,@RequestParam ("table") String
 		  model.addAttribute("startDate",dateStr);
 		  model.addAttribute("endDate",dateEnd);
 		return "editMatt2";
-	}
+	}*/
 	private static Date getDateAfter(Date date, int days) {
 		Calendar calendar= new GregorianCalendar();
 		calendar.setTime(date);
 		calendar.add(GregorianCalendar.DAY_OF_YEAR, days-1);
 		return calendar.getTime();
 	}
-	@RequestMapping({"/upload_matt"})
+/*	@RequestMapping({"/upload_matt"})
 	public String upload_matt(HttpServletRequest request,Model model){
 		String mattIdStr=request.getParameter("table");
 		int mattId=Integer.parseInt(mattIdStr);
@@ -652,7 +652,7 @@ public String download(HttpServletRequest request,@RequestParam ("table") String
 		connector.uploadMatt(userName, curentMatt);
 		return homereturn(model);
 	}
-	@RequestMapping({"/getMatt4EditNotif"})
+*/	@RequestMapping({"/getMatt4EditNotif"})
 	   public String getMatt4EditNotif(HttpServletRequest request, Model model){   
 	    String strMattId=request.getParameter("table");
 	    Integer mattId=Integer.parseInt(strMattId);

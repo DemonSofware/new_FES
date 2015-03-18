@@ -6,7 +6,7 @@
             background:#f0f0f0;
             margin-left: auto;
             margin-right: auto;
-			              -moz-user-select: none;
+ -moz-user-select: none;
   -khtml-user-select: none;
   -webkit-user-select: none;
   -o-user-select: none;
@@ -53,6 +53,8 @@
         }
         p {
             font-size: 0.6em;
+        }
+        img{cursor: pointer;
         }
         #wrapper {
             width: 100%;
@@ -145,5 +147,42 @@
     text-align: center;
     
         }
+         	#wrap1{
+		display: none;
+		opacity: 0.8;
+		position:absolute;
+		width:100%;
+		height:100%;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		padding: 16px;
+		background-color: rgba(1, 1, 1, 0.725);
+		z-index: 8888;
+		overflow:auto;
+	}
+	#black_bg{
+position:absolute;
+width:100%;
+height:100%;
+background:#000000;
+opacity:0.6;
+}
+	#share1{
+		width: 400px;
+		height: 400px;
+		margin: 50px auto;
+		display: none;
+		background: #fff;
+		z-index: 9999;
+		position: fixed;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		padding: 16px;
+		overflow: auto;
+	}
 
         #art::-webkit-scrollbar { width: 0 !important }

@@ -44,13 +44,14 @@ public class MatApplication {
 		return "newloginon";
 	}
 	@RequestMapping({"/registry"})
-	public String registry(){
+	public String registry(Model model){
+		model.addAttribute("reg",true);
 		return "newaccout_setting";
 	}
 	@RequestMapping({"/person"})
 	public String person(@RequestParam ("firstname") String firstName,@RequestParam ("lastname") String lastName,
 			@RequestParam ("email") String email,@RequestParam ("password") String password,Model model) {
-		Person pers = new Person(firstName,"", email, password, GMT_TIME_ZONE);
+		Person pers = new Person(firstName,lastName, email, password, GMT_TIME_ZONE);
 		
 		if (ifesbes1.setProfile(pers)==Response.IN_ACTIVE) {
 			model.addAttribute("email","EMAIL incorrect!");
@@ -81,18 +82,24 @@ public class MatApplication {
 		model.addAttribute("matt",ifesbes1.getMattNames(userName));
 		return "newhome";	
 	}
+	@RequestMapping({"/removematt"})
+	public String removeMATT(HttpServletRequest request,Model model){
+		String mattIdStr=request.getParameter("table");
+		int mattId=Integer.parseInt(mattIdStr);
+		ifesbes1.removeMatt(mattId);
+		return homereturn(model);
+	}
 	@RequestMapping(value = "newJson", method = RequestMethod.GET)
 	public @ResponseBody String newJson(@RequestParam(value = "mattjson", required = false) String mattjson,@RequestParam(value = "plus", required = false) String plus){
 		String mattToJSON=null;
-		System.out.println(mattjson);
+		System.out.println("получил json"+mattjson);
 		oldMatt.weekFromBrowser(mattjson);
 		Calendar cal=oldMatt.currentWeek;
-		System.out.println(plus);
-		if(plus.equals("plus")){cal.add(Calendar.DAY_OF_YEAR, 7);System.out.println("++");}
-		if(plus.equals("minus")){cal.add(Calendar.DAY_OF_YEAR, -7);System.out.println("--");}
-		System.out.println(cal.getTime());
+		if(plus.equals("plus")){cal.add(Calendar.DAY_OF_YEAR, 7);}
+		if(plus.equals("minus")){cal.add(Calendar.DAY_OF_YEAR, -7);}
 		mattToJSON = oldMatt.week2browser(cal.getTime());  
-		System.out.println(mattToJSON);
+		System.out.println("отдалл json"+mattToJSON);
+		System.out.println();
 	return mattToJSON;
 	}
 
@@ -104,6 +111,28 @@ public class MatApplication {
 	public String saveMattData(Model model){
 		ifesbes1.saveMatt(oldMatt,userEmail);
 		return  homereturn (model);
+	}
+	@RequestMapping({"/upload_matt"})
+	public String upload_matt(Model model){
+		int tabl=ifesbes1.saveMatt(oldMatt,userEmail);
+		List<String> uploadSN = new ArrayList<String>();
+		uploadSN.add(userName);
+		oldMatt.getData().setUploadCalendars(IFrontConnector.GOOGLE, uploadSN);
+		connector.uploadMatt(userName, oldMatt);
+		return action_edit(Integer.toString(tabl),model);
+	}
+
+	@RequestMapping({"/action_edit"})
+	public String action_edit (@RequestParam ("table") String mattId4Matt,Model model) {
+		  int tableId=Integer.parseInt(mattId4Matt);
+		  oldMatt=ifesbes1.getMatt(tableId);
+		  String namecalendar=oldMatt.getData().getName();
+		  String mattToJSON = oldMatt.week2browser(startDate(null));
+		  model.addAttribute("userName",userName);
+		  model.addAttribute("matJSON",mattToJSON);
+		  model.addAttribute("namecalendar",namecalendar);
+		  model.addAttribute("idmat",mattId4Matt);
+		return "newcreateMatt";
 	}
 	@RequestMapping({"/newmatt"})
 	public String createMatt2(@RequestParam ("namecalendar") String namecalendar,@RequestParam ("timeSlot") int timeSlot,Model model){
@@ -214,11 +243,41 @@ public String accountSettings (Model model) {
     	 authSN.put(authorizedSN[i], true);	    	 
      }
 //Add Person attributes
-     model.addAttribute("username", userName);
- //    model.addAttribute("name", m_name);
-     model.addAttribute("email", userEmail);
+     model.addAttribute("firstname", user.getName());
+     model.addAttribute("lastname", user.getFamilyName());
+     model.addAttribute("email", user.getEmail());
+     model.addAttribute("prof_firstname", user.getName());
+     model.addAttribute("prof_lastname", user.getFamilyName());
+     model.addAttribute("prof_email", user.getEmail());
+     model.addAttribute("prof_phone", "");
      model.addAttribute("tz"+user.getTimeZone(), "selected");
-     return "account_settings";
+     model.addAttribute("reg",false);
+     return "newaccout_setting";
+}
+@RequestMapping({"/savesettings_profile"})
+public String savesettings_profile(HttpServletRequest request, Model model) {
+	int resultSave = -1;
+	String name = request.getParameter("prof_firstname");
+	String lastname = request.getParameter("prof_lastname");
+	String email = request.getParameter("prof_email");
+	String password = request.getParameter("prof_password");
+	String password1 = request.getParameter("prof_password1");
+	String timeZoneStr = request.getParameter("timeZone");
+	if(timeZoneStr!=null) {
+		int timeZone = Integer.parseInt(timeZoneStr);
+		user.setTimeZone(timeZone);
+	}
+	if(name!=null && !name.equals("")) user.setName(name);
+	if(lastname!=null && !lastname.equals("")) user.setFamilyName(lastname);;
+//	if(email!=null && email.contains("@")) user.setEmail(email);
+	if(password!=null && !password.equals("") && password.equals(password1))
+		user.setPassword(password);
+	try {
+		resultSave = ifesbes1.updateProfile(user);
+	} catch (Exception e) {
+		model.addAttribute("exception", "don't update profile");
+	}
+	return accountSettings (model);
 }
 @RequestMapping({"/resauto"})
 public String resultAuthorization(String code, String access_token, Model model) {

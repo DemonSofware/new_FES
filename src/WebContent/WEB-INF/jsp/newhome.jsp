@@ -136,7 +136,7 @@
     <div id="first">
  		<img class="logo" src="resources/images/logo.gif" alt="" width="379" height="165" />
         <form  id="form2" >
-          <input type="button" value="Create a new Available calendar" onclick="show('block')" />
+          <img src="resources/img/calendar.png" title="Create a new Available calendar" onclick="show('block')" width='50' height='50' />
         </form>
         <form id="tableForm" name="tableForm" >
 	<input type="hidden" id="table" name="table">
@@ -148,8 +148,8 @@
    <table style="width:80%; margin-left:10%">  
    
    <tr>
-		<td><input name="${item.key}" type="image" src="resources/glas.png" title="View" onclick="table.value=this.name, tableForm.action='viewMatt'" width='30' height='30'></td>
-		<td><input name="${item.key}" type="image" src="resources/mus.png" title="Remove" onclick="table.value=this.name, tableForm.action='removematt'" width='30' height='30'></td>
+		<td><input name="${item.key}" type="image" src="resources/img/view.png" title="View" onclick="table.value=this.name, tableForm.action='action_edit'" width='50' height='50'></td>
+		<td><input name="${item.key}" type="image" src="resources/img/delete.png" title="Remove" onclick="table.value=this.name, tableForm.action='removematt'" width='50' height='50'></td>
 		<td colspan='8'>${item.value}</td>
    </tr>
  		
