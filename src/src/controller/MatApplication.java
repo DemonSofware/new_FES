@@ -94,10 +94,10 @@ public class MatApplication {
 		String mattToJSON=null;
 		System.out.println("получил json"+mattjson);
 		oldMatt.weekFromBrowser(mattjson);
-		Calendar cal=oldMatt.currentWeek;
+		Calendar cal=oldMatt.currentMonday;
 		if(plus.equals("plus")){cal.add(Calendar.DAY_OF_YEAR, 7);}
 		if(plus.equals("minus")){cal.add(Calendar.DAY_OF_YEAR, -7);}
-		mattToJSON = oldMatt.week2browser(cal.getTime());  
+		mattToJSON = oldMatt.weekToBrowser(cal.getTime());  
 		System.out.println("отдалл json"+mattToJSON);
 		System.out.println();
 	return mattToJSON;
@@ -127,7 +127,7 @@ public class MatApplication {
 		  int tableId=Integer.parseInt(mattId4Matt);
 		  oldMatt=ifesbes1.getMatt(tableId);
 		  String namecalendar=oldMatt.getData().getName();
-		  String mattToJSON = oldMatt.week2browser(startDate(null));
+		  String mattToJSON = oldMatt.weekToBrowser(startDate(null));
 		  model.addAttribute("userName",userName);
 		  model.addAttribute("matJSON",mattToJSON);
 		  model.addAttribute("namecalendar",namecalendar);
@@ -150,7 +150,7 @@ public class MatApplication {
 		  oldMatt=new Matt();
 		  oldMatt.setData(data);
 		  oldMatt.setSlots(newTabList);
-		  mattToJSON = oldMatt.week2browser(startDate);
+		  mattToJSON = oldMatt.weekToBrowser(startDate);
 		model.addAttribute("userName",userName);
 		model.addAttribute("matJSON",mattToJSON);
 		model.addAttribute("namecalendar",namecalendar);
